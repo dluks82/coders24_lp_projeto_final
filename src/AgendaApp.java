@@ -1,5 +1,9 @@
 public class AgendaApp {
     public static void main(String[] args) {
-        System.out.println("Just a Hello World!");
+        int tamanhoInicial = 1;
+        int tamanhoAtual = 0;
+        int quantidadeAtributos = 4;
+        String[][] data = new String[tamanhoInicial][quantidadeAtributos];
+
     }
 }
