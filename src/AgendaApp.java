@@ -50,14 +50,14 @@ public class AgendaApp {
         }
 
         // Verificando os contatos no array, somente teste
-        imprimirContatos();
+        listar();
         removido = remover("1");
         if (removido != null) {
             System.out.printf("O contato: %s com id %s foi removido!%n",
                     removido[1], removido[0]);
         }
         // teste
-        imprimirContatos();
+        listar();
 
         // A medida que os métodos e recursos sejam adicionados ao
         // programa, podemos remover os dados de teste
@@ -115,6 +115,25 @@ public class AgendaApp {
             }
         }
         return null;
+    }
+
+    static void listar() {
+
+        int charactersColunaId = 2;
+        int charactersColunaNome = 30;
+
+        String format = "| %-" + charactersColunaId + "s | %-" + charactersColunaNome + "s |%n";
+
+        System.out.printf(format, "ID", "Nome");
+        System.out.printf("+-%s-+-%s-+%n",
+                "-".repeat(charactersColunaId),
+                "-".repeat(charactersColunaNome));
+
+        for (int i = 0; i < tamanhoAtual; i++) {
+            String[] contato = data[i];
+            System.out.printf(format, contato[0], contato[1]);
+        }
+
     }
 
     static void crescerMatriz() {
