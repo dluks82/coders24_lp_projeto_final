@@ -13,74 +13,119 @@ public class AgendaApp {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Tamanho atual: " + tamanhoAtual);
+        while (true) {
+            String contador = String.format("%04d", tamanhoAtual);
 
-        // Adicionar primeiro contato
-        String[] novoContato1 = new String[4];
-        novoContato1[0] = Integer.toString(proximoId); // Definindo o ID do contato
-        System.out.print("informe o nome: ");
-        novoContato1[1] = input.nextLine();
-        System.out.print("informe o telefone: ");
-        novoContato1[2] = input.nextLine();
-        System.out.print("informe o email: ");
-        novoContato1[3] = input.nextLine();
+            System.out.println("""
+                    ╔══════════════════════════════════════════════════╗
+                    ║             _                    _               ║
+                    ║            /_\\  __ _ ___ _ _  __| |__ _          ║
+                    ║           / _ \\/ _` / -_) ' \\/ _` / _` |         ║
+                    ║          /_/ \\_\\__, \\___|_||_\\__,_\\__,_|         ║
+                    ║                |___/                             ║
+                    ║          Coders 2024       versão: 1.0.0         ║
+                    ╠══════════════════════════════════════════════════╣
+                    ║                  >>>> MENU <<<<                  ║
+                    ║                                                  ║
+                    ║        [1] - Adicionar Contato                   ║
+                    ║        [2] - Remover Contato                     ║
+                    ║        [3] - Detalhar Contato                    ║
+                    ║        [4] - Editar Contato                      ║
+                    ║        [5] - Listar Contatos                     ║
+                    ║        [6] - Sobre                               ║
+                    ║                                                  ║
+                    ║        [9] - Sair                                ║
+                    ╚══════════════════════════════ Contatos""" + " " + contador + " ═════╝"); // 52 de largura
+            System.out.print("Informe a operação desejada: ");
 
-        String[] adicionado;
-        adicionado = adicionar(novoContato1);
-        System.out.printf("O contato: %s com id %s foi adicionado!%n",
-                adicionado[1], adicionado[0]);
+            int opcao = input.nextInt();
+            input.nextLine();
 
-        // Adicionando mais 2 contatos para teste
-        String[] outroContato = {null, "Diana", "42 77", "diana"};
-        adicionado = adicionar(outroContato);
-        System.out.printf("O contato: %s com id %s foi adicionado!%n",
-                adicionado[1], adicionado[0]);
+            if (opcao == 9) break;
 
-        outroContato = new String[]{null, "Eli", "41 66", "eli"};
-        adicionado = adicionar(outroContato);
-        System.out.printf("O contato: %s com id %s foi adicionado!%n",
-                adicionado[1], adicionado[0]);
+            switch (opcao) {
+                case 1:
+                    // Adicionar
 
-        // Removendo...
-        String[] removido;
-        removido = remover("3");
-        if (removido != null) {
-            System.out.printf("O contato: %s com id %s foi removido!%n",
-                    removido[1], removido[0]);
+                    System.out.println("═════════════ Adicionar novo contato ═══════════════");
+                    System.out.print("Nome: ");
+                    String nome = input.nextLine();
+                    System.out.print("Telefone: ");
+                    String telefone = input.nextLine();
+                    System.out.print("Email: ");
+                    String email = input.nextLine();
+
+                    String[] novoContato = {null, nome, telefone, email};
+
+                    String[] adicionado = adicionar(novoContato);
+
+                    System.out.println("Contato adicionado! Enter para continuar...");
+                    input.nextLine();
+                    break;
+                case 2:
+                    // Remover
+                    System.out.println("═════════════════ Remover contato ══════════════════");
+                    System.out.print("Id [0 para cancelar]: ");
+                    String idParaRemover = input.nextLine();
+
+                    if (idParaRemover.equals("0")) break;
+
+                    String[] removido = remover(idParaRemover);
+
+                    String mensagem = removido != null ? "Contato removido!" : "Id não encontrado!";
+
+                    System.out.printf("%s Enter para continuar...", mensagem);
+                    input.nextLine();
+                    break;
+                case 3:
+                    // Detalhar
+                    System.out.println("════════════════ Detalhar contato ══════════════════");
+                    System.out.print("Id [0 para cancelar]: ");
+                    String idParaListar = input.nextLine();
+
+                    if (idParaListar.equals("0")) break;
+
+                    // TODO: implementar
+
+                    System.out.println("Enter para continuar...");
+                    input.nextLine();
+                    break;
+                case 4:
+                    // Editar
+                    System.out.println("═════════════════ Editar contato ═══════════════════");
+                    System.out.print("Id [0 para cancelar]: ");
+                    String idParaEditar = input.nextLine();
+
+                    if (idParaEditar.equals("0")) break;
+
+                    // TODO: implementar
+
+                    System.out.println("Enter para continuar...");
+                    input.nextLine();
+                    break;
+                case 5:
+                    // Listar
+                    System.out.println("═════════════════ Listar contatos ══════════════════");
+                    listar();
+
+                    System.out.println("Enter para continuar...");
+                    input.nextLine();
+                    break;
+                case 6:
+                    // Sobre
+
+                    // TODO: implementar
+
+                    System.out.println("Enter para continuar...");
+                    input.nextLine();
+                    break;
+                default:
+                    System.out.println("Opção inválida! Enter para continuar...");
+                    input.nextLine();
+            }
         }
-
-        // Verificando os contatos no array, somente teste
-        listar();
-        removido = remover("1");
-        if (removido != null) {
-            System.out.printf("O contato: %s com id %s foi removido!%n",
-                    removido[1], removido[0]);
-        }
-        // teste
-        listar();
-
-        // A medida que os métodos e recursos sejam adicionados ao
-        // programa, podemos remover os dados de teste
 
         input.close();
-    }
-
-    // Para teste
-    static void imprimirContatos() {
-        StringBuilder output = new StringBuilder("[\n");
-        for (int i = 0; i < tamanhoAtual; i++) {
-
-            String[] contato = data[i];
-            output.append(String.format("{Id: %s, Nome: %s, Telefone: %s, Email: %s},%n",
-                    contato[0],
-                    contato[1],
-                    contato[2],
-                    contato[3]));
-        }
-        output.append("]");
-
-        System.out.println(output);
-        System.out.flush();
     }
 
     // Daqui em diante ficam os métodos implementados
