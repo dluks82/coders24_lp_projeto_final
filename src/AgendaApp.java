@@ -72,7 +72,6 @@ public class AgendaApp {
                 case 4:
                     // Editar
                     System.out.println("═════════════════ Editar contato ═══════════════════");
-                   // while (true){
                         System.out.print("Id [0 para cancelar]: ");
                         String idParaEditar = input.nextLine();
 
@@ -95,7 +94,6 @@ public class AgendaApp {
                             input.nextLine();
                             break;
                         }
-                   // }
                     break;
                 case 5:
                     // Listar
@@ -183,6 +181,8 @@ public class AgendaApp {
         }
         return false;
     }
+
+
 
     static void editar(String contactId, String novoNome, String novoTelefone,String novoEmail){
         for (int i = 0; i < tamanhoAtual; i++){
