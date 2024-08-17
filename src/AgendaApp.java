@@ -17,8 +17,7 @@ public class AgendaApp {
 
             exibirMenu();
 
-            int opcao = input.nextInt();
-            input.nextLine();
+            int opcao = receberOpcao(input, "Informe a operação desejada: ");
 
             if (opcao == 9) break;
 
@@ -121,6 +120,18 @@ public class AgendaApp {
     }
 
     // Daqui em diante ficam os métodos implementados
+
+    static int receberOpcao(Scanner input, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            try {
+                return Integer.parseInt(input.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Valor inválido! Enter para continuar...");
+                input.nextLine();
+            }
+        }
+    }
 
     static String[] adicionar(String[] novoContato) {
         if (tamanhoAtual == data.length)
@@ -227,6 +238,5 @@ public class AgendaApp {
                 ║                                                  ║
                 ║        [9] - Sair                                ║
                 ╚══════════════════════════════ Contatos""" + " " + contador + " ═════╝"); // 52 de largura
-        System.out.print("Informe a operação desejada: ");
     }
 }
