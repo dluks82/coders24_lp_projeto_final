@@ -37,7 +37,9 @@ public class AgendaApp {
 
                     String[] adicionado = adicionar(novoContato);
 
-                    System.out.println("Contato adicionado! Enter para continuar...");
+                    String AdicionarMensagem = adicionado != null ? "Contato adicionado!" : "Falha ao adicionar contato!";
+
+                    System.out.printf("%s Enter para continuar...%n", AdicionarMensagem);
                     input.nextLine();
                     break;
                 case 2:
@@ -76,7 +78,9 @@ public class AgendaApp {
 
                     if (idParaEditar.equals("0")) break;
 
-                    if (verificarIdExistente(idParaEditar) < 0) {
+                    int indiceParaEditar = verificarIdExistente(idParaEditar);
+
+                    if (indiceParaEditar < 0) {
                         System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar. ");
                     } else {
                         System.out.println("CASO ALGUM CAMPO FICAR SEM PREENCHER OS DADOS ANTERIORES SERÃO MANTIDOS");
@@ -89,7 +93,7 @@ public class AgendaApp {
 
                         String[] editado = {idParaEditar, novoNome, novoTelefone, novoEmail};
 
-                        editar(editado);
+                        editar(indiceParaEditar, editado);
                     }
                     System.out.println("Enter para continuar...");
                     input.nextLine();
@@ -134,6 +138,16 @@ public class AgendaApp {
     }
 
     static String[] adicionar(String[] novoContato) {
+        if (verificarTelefoneExiste(novoContato[2]) >= 0) {
+            System.out.println("Telefone já cadastrado!");
+            return null;
+        }
+
+        if (verificarEmailExiste(novoContato[3]) >= 0) {
+            System.out.println("Email já cadastrado!");
+            return null;
+        }
+
         if (tamanhoAtual == data.length)
             crescerMatriz();
 
@@ -190,16 +204,41 @@ public class AgendaApp {
         return -1;
     }
 
-    static void editar(String[] contatoEditado) {
+    static int verificarTelefoneExiste(String telefone) {
         for (int i = 0; i < tamanhoAtual; i++) {
-            String[] contato = data[i];
-            if (contato[0].equals(contatoEditado[0])) {
-                data[i] = contatoEditado;
-                System.out.println("Contato atualizado com sucesso!");
-                return;
+            String telefoneItem = data[i][2];
+            if (telefoneItem.trim().equals(telefone.trim())) {
+                return i;
             }
         }
-        System.out.println("Contato não encontrado!");
+        return -1;
+    }
+
+    static int verificarEmailExiste(String email) {
+        for (int i = 0; i < tamanhoAtual; i++) {
+            String emailItem = data[i][3];
+            if (emailItem.trim().equals(email.trim())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static void editar(int indiceParaEditar, String[] contatoEditado) {
+        int indiceTelefoneDuplicado = verificarTelefoneExiste(contatoEditado[2]);
+        if (indiceTelefoneDuplicado >= 0 && indiceTelefoneDuplicado != indiceParaEditar) {
+            System.out.println("Telefone já cadastrado!");
+            return;
+        }
+
+        int indiceEmailDuplicado = verificarEmailExiste(contatoEditado[3]);
+        if (indiceEmailDuplicado >= 0 && indiceEmailDuplicado != indiceParaEditar) {
+            System.out.println("Email já cadastrado!");
+            return;
+        }
+
+        data[indiceParaEditar] = contatoEditado;
+        System.out.println("Contato atualizado com sucesso!");
     }
 
     static void crescerMatriz() {
