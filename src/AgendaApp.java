@@ -72,7 +72,7 @@ public class AgendaApp {
                 case 4:
                     // Editar
                     System.out.println("═════════════════ Editar contato ═══════════════════");
-                    while (true){
+                   // while (true){
                         System.out.print("Id [0 para cancelar]: ");
                         String idParaEditar = input.nextLine();
 
@@ -82,11 +82,11 @@ public class AgendaApp {
                             System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar. ");
                         }else{
                             System.out.println("CASO ALGUM CAMPO FICAR SEM PREENCHER OS DADOS ANTERIORES SERÃO MANTIDOS");
-                            System.out.println("Novo Nome: ");
+                            System.out.print("Novo Nome: ");
                             String novoNome = input.nextLine();
-                            System.out.println("Novo Telefone: ");
+                            System.out.print("Novo Telefone: ");
                             String novoTelefone = input.nextLine();
-                            System.out.println("Novo Email: ");
+                            System.out.print("Novo Email: ");
                             String novoEmail = input.nextLine();
 
                             editar(idParaEditar,novoNome,novoTelefone,novoEmail);
@@ -95,7 +95,7 @@ public class AgendaApp {
                             input.nextLine();
                             break;
                         }
-                    }
+                   // }
                     break;
                 case 5:
                     // Listar
