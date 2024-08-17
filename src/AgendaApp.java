@@ -77,8 +77,21 @@ public class AgendaApp {
 
                     if (idParaEditar.equals("0")) break;
 
-                    // TODO: implementar
+                    if (verificarIdExistente(idParaEditar) < 0) {
+                        System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar. ");
+                    } else {
+                        System.out.println("CASO ALGUM CAMPO FICAR SEM PREENCHER OS DADOS ANTERIORES SERÃO MANTIDOS");
+                        System.out.print("Novo Nome: ");
+                        String novoNome = input.nextLine();
+                        System.out.print("Novo Telefone: ");
+                        String novoTelefone = input.nextLine();
+                        System.out.print("Novo Email: ");
+                        String novoEmail = input.nextLine();
 
+                        String[] editado = {idParaEditar, novoNome, novoTelefone, novoEmail};
+
+                        editar(editado);
+                    }
                     System.out.println("Enter para continuar...");
                     input.nextLine();
                     break;
@@ -124,21 +137,18 @@ public class AgendaApp {
     }
 
     static String[] remover(String contactId) {
-        if (Integer.parseInt(contactId) > tamanhoAtual) return null;
+        int idExiste = verificarIdExistente(contactId);
 
-        for (int i = 0; i < tamanhoAtual; i++) {
-            String[] contato = data[i];
-            if (contato[0].equals(contactId)) {
-                if (i != tamanhoAtual - 1) {
-                    for (int j = i; j < tamanhoAtual; j++) {
-                        data[j] = data[j + 1];
-                    }
-                }
-                tamanhoAtual--;
-                return contato;
+        if (idExiste < 0) {
+            return null;
+        }
+        if (idExiste != tamanhoAtual - 1) {
+            for (int j = idExiste; j < tamanhoAtual - 1; j++) {
+                data[j] = data[j + 1];
             }
         }
-        return null;
+        tamanhoAtual--;
+        return data[idExiste];
     }
 
     static void listar() {
@@ -158,6 +168,27 @@ public class AgendaApp {
             System.out.printf(format, contato[0], contato[1]);
         }
 
+    }
+
+    static int verificarIdExistente(String contactId) {
+        for (int i = 0; i < tamanhoAtual; i++) {
+            if (data[i][0].equals(contactId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static void editar(String[] contatoEditado) {
+        for (int i = 0; i < tamanhoAtual; i++) {
+            String[] contato = data[i];
+            if (contato[0].equals(contatoEditado[0])) {
+                data[i] = contatoEditado;
+                System.out.println("Contato atualizado com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Contato não encontrado!");
     }
 
     static void crescerMatriz() {
