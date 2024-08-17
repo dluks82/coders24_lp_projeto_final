@@ -37,7 +37,9 @@ public class AgendaApp {
 
                     String[] adicionado = adicionar(novoContato);
 
-                    System.out.println("Contato adicionado! Enter para continuar...");
+                    String AdicionarMensagem = adicionado != null ? "Contato adicionado!" : "Falha ao adicionar contato!";
+
+                    System.out.printf("%s Enter para continuar...%n", AdicionarMensagem);
                     input.nextLine();
                     break;
                 case 2:
@@ -134,6 +136,16 @@ public class AgendaApp {
     }
 
     static String[] adicionar(String[] novoContato) {
+        if(verificarTelefoneExiste(novoContato[2]) >= 0) {
+            System.out.println("Telefone já cadastrado!");
+            return null;
+        }
+
+        if(verificarEmailExiste(novoContato[3]) >= 0) {
+            System.out.println("Email já cadastrado!");
+            return null;
+        }
+
         if (tamanhoAtual == data.length)
             crescerMatriz();
 
@@ -184,6 +196,26 @@ public class AgendaApp {
     static int verificarIdExistente(String contactId) {
         for (int i = 0; i < tamanhoAtual; i++) {
             if (data[i][0].equals(contactId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static int verificarTelefoneExiste(String telefone) {
+        for (int i = 0; i < tamanhoAtual; i++) {
+            String telefoneItem = data[i][2];
+            if (telefoneItem.trim().equals(telefone.trim())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static int verificarEmailExiste(String email) {
+        for (int i = 0; i < tamanhoAtual; i++) {
+            String emailItem = data[i][3];
+            if (emailItem.trim().equals(email.trim())) {
                 return i;
             }
         }
