@@ -247,7 +247,16 @@ public class AgendaApp {
             return;
         }
 
-        data[indiceParaEditar] = contatoEditado;
+        // atualiza ou mantém nome
+        data[indiceParaEditar][1] =
+                contatoEditado[1].isEmpty() ? data[indiceParaEditar][1] : contatoEditado[1];
+        // atualiza ou mantém telefone
+        data[indiceParaEditar][2] =
+                contatoEditado[2].isEmpty() ? data[indiceParaEditar][2] : contatoEditado[2];
+        // atualiza ou mantém e-mail
+        data[indiceParaEditar][3] =
+                contatoEditado[3].isEmpty() ? data[indiceParaEditar][3] : contatoEditado[3];
+
         System.out.println("Contato atualizado com sucesso!");
     }
 
