@@ -26,9 +26,9 @@ public class AgendaApp {
                     // Adicionar
 
                     System.out.println("═════════════ Adicionar novo contato ═══════════════");
-                    String nome = receberStringInput(input, "Nome: ", false);
-                    String telefone = receberStringInput(input, "Telefone: ", false);
-                    String email = receberStringInput(input, "Email: ", false);
+                    String nome = solicitarEntradaTexto(input, "Nome: ", false);
+                    String telefone = solicitarEntradaTexto(input, "Telefone: ", false);
+                    String email = solicitarEntradaTexto(input, "Email: ", false);
 
                     String[] novoContato = {null, nome, telefone, email};
 
@@ -43,7 +43,7 @@ public class AgendaApp {
                     // Remover
                     System.out.println("═════════════════ Remover contato ══════════════════");
                     String idParaRemover =
-                            receberStringInput(input, "Id [0 para cancelar]: ", false);
+                            solicitarEntradaTexto(input, "Id [0 para cancelar]: ", false);
 
                     if (idParaRemover.equals("0")) break;
 
@@ -58,7 +58,7 @@ public class AgendaApp {
                     // Detalhar
                     System.out.println("════════════════ Detalhar contato ══════════════════");
                     String idParaListar =
-                            receberStringInput(input, "Id [0 para cancelar]: ", false);
+                            solicitarEntradaTexto(input, "Id [0 para cancelar]: ", false);
 
                     if (idParaListar.equals("0")) break;
 
@@ -72,7 +72,7 @@ public class AgendaApp {
                     // Editar
                     System.out.println("═════════════════ Editar contato ═══════════════════");
                     String idParaEditar =
-                            receberStringInput(input, "Id [0 para cancelar]: ", false);
+                            solicitarEntradaTexto(input, "Id [0 para cancelar]: ", false);
 
                     if (idParaEditar.equals("0")) break;
 
@@ -82,9 +82,9 @@ public class AgendaApp {
                         System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar. ");
                     } else {
                         System.out.println("CASO ALGUM CAMPO FICAR SEM PREENCHER OS DADOS ANTERIORES SERÃO MANTIDOS");
-                        String novoNome = receberStringInput(input, "Novo Nome: ", true);
-                        String novoTelefone = receberStringInput(input, "Novo Telefone: ", true);
-                        String novoEmail = receberStringInput(input, "Novo Email: ", true);
+                        String novoNome = solicitarEntradaTexto(input, "Novo Nome: ", true);
+                        String novoTelefone = solicitarEntradaTexto(input, "Novo Telefone: ", true);
+                        String novoEmail = solicitarEntradaTexto(input, "Novo Email: ", true);
 
                         String[] editado = {idParaEditar, novoNome, novoTelefone, novoEmail};
 
@@ -132,7 +132,7 @@ public class AgendaApp {
         }
     }
 
-    static String receberStringInput(
+    static String solicitarEntradaTexto(
             Scanner input, String mensagem, boolean podeSerVazio) {
         while (true) {
             System.out.print(mensagem);
@@ -145,7 +145,6 @@ public class AgendaApp {
             System.out.println("Não pode ser vazio! Enter para continuar...");
             input.nextLine();
         }
-
     }
 
     static String[] adicionar(String[] novoContato) {
