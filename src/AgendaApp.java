@@ -62,7 +62,19 @@ public class AgendaApp {
 
                     if (idParaListar.equals("0")) break;
 
-                    // TODO: implementar
+                    int indiceParalistar = verificarIdExistente(idParaListar);
+
+                    if (indiceParalistar < 0) {
+                        System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar.");
+                    }
+                    else {
+                       String[] contato = data[indiceParalistar];
+                       System.out.println("Detalhes do contato:");
+                       System.out.printf("ID: %s%n", contato[0]);
+                       System.out.printf("Nome: %s%n", contato[1]);
+                       System.out.printf("Telefone: %s%n", contato[1]);
+                       System.out.printf("Email: %s%n", contato[3]);
+                    }
 
                     System.out.println("Enter para continuar...");
                     input.nextLine();
