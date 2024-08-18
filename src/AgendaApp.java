@@ -137,9 +137,10 @@ public class AgendaApp {
             System.out.print(mensagem);
             String entrada = input.nextLine().trim();
 
-            if ((entrada.isEmpty() && podeSerVazio) || (!entrada.isEmpty() && !podeSerVazio)) {
+            if (!entrada.isEmpty() || podeSerVazio) {
                 return entrada;
             }
+
             System.out.println("Não pode ser vazio! Enter para continuar...");
             input.nextLine();
         }
