@@ -157,13 +157,8 @@ public class AgendaApp {
     }
 
     static String[] adicionar(String[] novoContato) {
-        if (verificarTelefoneExiste(novoContato[2]) >= 0) {
-            System.out.println("Telefone já cadastrado!");
-            return null;
-        }
-
-        if (verificarEmailExiste(novoContato[3]) >= 0) {
-            System.out.println("Email já cadastrado!");
+        if (contatoExiste(novoContato[2], "Telefone") ||
+                contatoExiste(novoContato[3], "Email")) {
             return null;
         }
 
@@ -245,6 +240,17 @@ public class AgendaApp {
 
         }
 
+    }
+
+    static boolean contatoExiste(String valor, String tipo) {
+        if (tipo.equals("Telefone") && verificarTelefoneExiste(valor) >= 0) {
+            System.out.println(tipo + " já cadastrado!");
+            return true;
+        } else if (tipo.equals("Email") && verificarEmailExiste(valor) >= 0) {
+            System.out.println(tipo + " já cadastrado!");
+            return true;
+        }
+        return false;
     }
 
 
