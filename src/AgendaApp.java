@@ -104,7 +104,7 @@ public class AgendaApp {
                 case 6:
                     // Sobre
 
-                    // TODO: implementar
+                    exibirSobre();
 
                     System.out.println("Enter para continuar...");
                     input.nextLine();
@@ -212,8 +212,7 @@ public class AgendaApp {
 
         if (indiceParalistar < 0) {
             System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar.");
-        }
-        else {
+        } else {
             int charactersColunaId = 2;
             int charactersColunaNome = 30;
             int charactersColunaTelefone = 20;
@@ -332,5 +331,31 @@ public class AgendaApp {
                 ║                                                  ║
                 ║        [9] - Sair                                ║
                 ╚══════════════════════════════ Contatos""" + " " + contador + " ═════╝"); // 52 de largura
+    }
+
+    static void exibirSobre() {
+        System.out.println("""
+                ╔══════════════════════════════════════════════════╗
+                ║             _                    _               ║
+                ║            /_\\  __ _ ___ _ _  __| |__ _          ║
+                ║           / _ \\/ _` / -_) ' \\/ _` / _` |         ║
+                ║          /_/ \\_\\__, \\___|_||_\\__,_\\__,_|         ║
+                ║                |___/                             ║
+                ║          Coders 2024       versão: 1.0.0         ║
+                ╠══════════════════════════════════════════════════╣
+                ║                  >>>> SOBRE <<<<                 ║
+                ║                                                  ║
+                ║    A aplicação Agenda foi desenvolvida como      ║
+                ║  projeto de conclusão do módulo 'Lógica de       ║
+                ║  Programação I', no curso 'Santander Coders      ║
+                ║  2024.1 - Back-End'.                             ║
+                ║                                                  ║
+                ║                 COLABORADORES                    ║
+                ║      -  Diogo Lucas de Oliveira                  ║
+                ║      -  Eloise Helena Moraes                     ║
+                ║      -  Irving Lui                               ║
+                ║      -  Isaque Menezes                           ║
+                ║                                                  ║
+                ╚══════════════════════════════════════════════════╝""");
     }
 }
