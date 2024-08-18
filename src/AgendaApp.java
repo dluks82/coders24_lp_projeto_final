@@ -26,12 +26,9 @@ public class AgendaApp {
                     // Adicionar
 
                     System.out.println("═════════════ Adicionar novo contato ═══════════════");
-                    System.out.print("Nome: ");
-                    String nome = input.nextLine();
-                    System.out.print("Telefone: ");
-                    String telefone = input.nextLine();
-                    System.out.print("Email: ");
-                    String email = input.nextLine();
+                    String nome = receberStringInput(input, "Nome: ", false);
+                    String telefone = receberStringInput(input, "Telefone: ", false);
+                    String email = receberStringInput(input, "Email: ", false);
 
                     String[] novoContato = {null, nome, telefone, email};
 
@@ -45,8 +42,8 @@ public class AgendaApp {
                 case 2:
                     // Remover
                     System.out.println("═════════════════ Remover contato ══════════════════");
-                    System.out.print("Id [0 para cancelar]: ");
-                    String idParaRemover = input.nextLine();
+                    String idParaRemover =
+                            receberStringInput(input, "Id [0 para cancelar]: ", false);
 
                     if (idParaRemover.equals("0")) break;
 
@@ -60,8 +57,8 @@ public class AgendaApp {
                 case 3:
                     // Detalhar
                     System.out.println("════════════════ Detalhar contato ══════════════════");
-                    System.out.print("Id [0 para cancelar]: ");
-                    String idParaListar = input.nextLine();
+                    String idParaListar =
+                            receberStringInput(input, "Id [0 para cancelar]: ", false);
 
                     if (idParaListar.equals("0")) break;
 
@@ -73,8 +70,8 @@ public class AgendaApp {
                 case 4:
                     // Editar
                     System.out.println("═════════════════ Editar contato ═══════════════════");
-                    System.out.print("Id [0 para cancelar]: ");
-                    String idParaEditar = input.nextLine();
+                    String idParaEditar =
+                            receberStringInput(input, "Id [0 para cancelar]: ", false);
 
                     if (idParaEditar.equals("0")) break;
 
@@ -84,12 +81,9 @@ public class AgendaApp {
                         System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar. ");
                     } else {
                         System.out.println("CASO ALGUM CAMPO FICAR SEM PREENCHER OS DADOS ANTERIORES SERÃO MANTIDOS");
-                        System.out.print("Novo Nome: ");
-                        String novoNome = input.nextLine();
-                        System.out.print("Novo Telefone: ");
-                        String novoTelefone = input.nextLine();
-                        System.out.print("Novo Email: ");
-                        String novoEmail = input.nextLine();
+                        String novoNome = receberStringInput(input, "Novo Nome: ", true);
+                        String novoTelefone = receberStringInput(input, "Novo Telefone: ", true);
+                        String novoEmail = receberStringInput(input, "Novo Email: ", true);
 
                         String[] editado = {idParaEditar, novoNome, novoTelefone, novoEmail};
 
@@ -135,6 +129,21 @@ public class AgendaApp {
                 input.nextLine();
             }
         }
+    }
+
+    static String receberStringInput(
+            Scanner input, String mensagem, boolean podeSerVazio) {
+        while (true) {
+            System.out.print(mensagem);
+            String entrada = input.nextLine().trim();
+
+            if ((entrada.isEmpty() && podeSerVazio) || (!entrada.isEmpty() && !podeSerVazio)) {
+                return entrada;
+            }
+            System.out.println("Não pode ser vazio! Enter para continuar...");
+            input.nextLine();
+        }
+
     }
 
     static String[] adicionar(String[] novoContato) {
