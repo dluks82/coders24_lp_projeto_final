@@ -7,6 +7,12 @@ public class AgendaApp {
     static int tamanhoAtual = 0;
 
     static int totalAtributos = 4;
+
+    static final int INDEX_ID = 0;
+    static final int INDEX_NOME = 1;
+    static final int INDEX_TELEFONE = 2;
+    static final int INDEX_EMAIL = 3;
+
     static String[][] data = new String[capacidadeInicial][totalAtributos];
 
     public static void main(String[] args) {
@@ -157,15 +163,15 @@ public class AgendaApp {
     }
 
     static String[] adicionar(String[] novoContato) {
-        if (contatoExiste(novoContato[2], "Telefone") ||
-                contatoExiste(novoContato[3], "Email")) {
+        if (contatoExiste(novoContato[INDEX_TELEFONE], "Telefone") ||
+                contatoExiste(novoContato[INDEX_EMAIL], "Email")) {
             return null;
         }
 
         if (tamanhoAtual == data.length)
             crescerMatriz();
 
-        novoContato[0] = Integer.toString(proximoId); // Definindo o ID do contato
+        novoContato[INDEX_ID] = Integer.toString(proximoId); // Definindo o ID do contato
 
         data[tamanhoAtual] = novoContato;
 
@@ -256,7 +262,7 @@ public class AgendaApp {
 
     static int verificarIdExistente(String contactId) {
         for (int i = 0; i < tamanhoAtual; i++) {
-            if (data[i][0].equals(contactId)) {
+            if (data[i][INDEX_ID].equals(contactId)) {
                 return i;
             }
         }
@@ -265,7 +271,7 @@ public class AgendaApp {
 
     static int verificarTelefoneExiste(String telefone) {
         for (int i = 0; i < tamanhoAtual; i++) {
-            String telefoneItem = data[i][2];
+            String telefoneItem = data[i][INDEX_TELEFONE];
             if (telefoneItem.trim().equals(telefone.trim())) {
                 return i;
             }
@@ -275,7 +281,7 @@ public class AgendaApp {
 
     static int verificarEmailExiste(String email) {
         for (int i = 0; i < tamanhoAtual; i++) {
-            String emailItem = data[i][3];
+            String emailItem = data[i][INDEX_EMAIL];
             if (emailItem.trim().equals(email.trim())) {
                 return i;
             }
@@ -284,27 +290,24 @@ public class AgendaApp {
     }
 
     static void editar(int indiceParaEditar, String[] contatoEditado) {
-        int indiceTelefoneDuplicado = verificarTelefoneExiste(contatoEditado[2]);
+        int indiceTelefoneDuplicado = verificarTelefoneExiste(contatoEditado[INDEX_TELEFONE]);
         if (indiceTelefoneDuplicado >= 0 && indiceTelefoneDuplicado != indiceParaEditar) {
             System.out.println("Telefone já cadastrado!");
             return;
         }
 
-        int indiceEmailDuplicado = verificarEmailExiste(contatoEditado[3]);
+        int indiceEmailDuplicado = verificarEmailExiste(contatoEditado[INDEX_EMAIL]);
         if (indiceEmailDuplicado >= 0 && indiceEmailDuplicado != indiceParaEditar) {
             System.out.println("Email já cadastrado!");
             return;
         }
 
-        // atualiza ou mantém nome
-        data[indiceParaEditar][1] =
-                contatoEditado[1].isEmpty() ? data[indiceParaEditar][1] : contatoEditado[1];
-        // atualiza ou mantém telefone
-        data[indiceParaEditar][2] =
-                contatoEditado[2].isEmpty() ? data[indiceParaEditar][2] : contatoEditado[2];
-        // atualiza ou mantém e-mail
-        data[indiceParaEditar][3] =
-                contatoEditado[3].isEmpty() ? data[indiceParaEditar][3] : contatoEditado[3];
+        data[indiceParaEditar][INDEX_NOME] =
+                contatoEditado[INDEX_NOME].isEmpty() ? data[indiceParaEditar][INDEX_NOME] : contatoEditado[INDEX_NOME];
+        data[indiceParaEditar][INDEX_TELEFONE] =
+                contatoEditado[INDEX_TELEFONE].isEmpty() ? data[indiceParaEditar][INDEX_TELEFONE] : contatoEditado[INDEX_TELEFONE];
+        data[indiceParaEditar][INDEX_EMAIL] =
+                contatoEditado[INDEX_EMAIL].isEmpty() ? data[indiceParaEditar][INDEX_EMAIL] : contatoEditado[INDEX_EMAIL];
 
         System.out.println("Contato atualizado com sucesso!");
     }
