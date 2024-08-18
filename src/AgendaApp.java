@@ -17,7 +17,7 @@ public class AgendaApp {
 
             exibirMenu();
 
-            int opcao = receberOpcao(input, "Informe a operação desejada: ");
+            int opcao = solicitarOpcaoUsuario(input, "Informe a operação desejada: ");
 
             if (opcao == 9) break;
 
@@ -120,13 +120,22 @@ public class AgendaApp {
 
     // Daqui em diante ficam os métodos implementados
 
-    static int receberOpcao(Scanner input, String mensagem) {
+    /**
+     * Solicita ao usuário que insira uma opção numérica, exibindo uma mensagem.
+     * O método continuará solicitando até que uma entrada válida seja fornecida.
+     *
+     * @param input    Scanner para capturar a entrada do usuário.
+     * @param mensagem Mensagem a ser exibida solicitando a entrada.
+     * @return A opção numérica inserida pelo usuário.
+     */
+    static int solicitarOpcaoUsuario(Scanner input, String mensagem) {
         while (true) {
             System.out.print(mensagem);
+            String entrada = input.nextLine().trim();
             try {
-                return Integer.parseInt(input.nextLine());
+                return Integer.parseInt(entrada);
             } catch (NumberFormatException e) {
-                System.out.println("Valor inválido! Enter para continuar...");
+                System.out.println("Entrada inválida! Por favor, insira um número. Pressione Enter para continuar...");
                 input.nextLine();
             }
         }
