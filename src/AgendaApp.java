@@ -62,19 +62,8 @@ public class AgendaApp {
 
                     if (idParaListar.equals("0")) break;
 
-                    int indiceParalistar = verificarIdExistente(idParaListar);
+                    detalhar(idParaListar);
 
-                    if (indiceParalistar < 0) {
-                        System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar.");
-                    }
-                    else {
-                       String[] contato = data[indiceParalistar];
-                       System.out.println("Detalhes do contato:");
-                       System.out.printf("ID: %s%n", contato[0]);
-                       System.out.printf("Nome: %s%n", contato[1]);
-                       System.out.printf("Telefone: %s%n", contato[1]);
-                       System.out.printf("Email: %s%n", contato[3]);
-                    }
 
                     System.out.println("Enter para continuar...");
                     input.nextLine();
@@ -216,6 +205,41 @@ public class AgendaApp {
         }
 
     }
+
+    static void detalhar(String idParaListar) {
+
+        int indiceParalistar = verificarIdExistente(idParaListar);
+
+        if (indiceParalistar < 0) {
+            System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar.");
+        }
+        else {
+            int charactersColunaId = 2;
+            int charactersColunaNome = 30;
+            int charactersColunaTelefone = 20;
+            int charactersColunaEmail = 30;
+
+
+            String format = "| %-" + charactersColunaId + "s | %-" + charactersColunaNome + "s | %-" + charactersColunaTelefone + "s | %-" + charactersColunaEmail + "s %n";
+
+            System.out.printf(format, "ID", "Nome", "Telefone", "Email");
+            System.out.printf("+-%s-+-%s-+-%s-+-%s-+%n",
+                    "-".repeat(charactersColunaId),
+                    "-".repeat(charactersColunaNome),
+                    "-".repeat(charactersColunaTelefone),
+                    "-".repeat(charactersColunaEmail));
+
+
+            for (int i = 0; i < tamanhoAtual; i++) {
+                String[] contato = data[i];
+                System.out.printf(format, contato[0], contato[1], contato[2], contato[3]);
+
+            }
+
+        }
+
+    }
+
 
     static int verificarIdExistente(String contactId) {
         for (int i = 0; i < tamanhoAtual; i++) {
