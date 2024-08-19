@@ -1,5 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * Esta classe representa uma aplicação de agenda para gerenciamento de contatos.
+ * Permite adicionar, remover, editar, detalhar e listar contatos.
+ * <p>
+ * A agenda armazena os contatos em uma matriz bidimensional onde cada linha representa um contato,
+ * e cada coluna representa um atributo do contato (ID, nome, telefone e e-mail).
+ * <p>
+ * A aplicação é executada a partir do método {@link #main(String[])} e oferece um menu de opções
+ * para o usuário interagir com a agenda.
+ *
+ * @since 1.0
+ */
 public class AgendaApp {
     static int proximoId = 1;
 
@@ -129,8 +141,6 @@ public class AgendaApp {
         input.close();
     }
 
-    // Daqui em diante ficam os métodos implementados
-
     /**
      * Solicita ao usuário que insira uma opção numérica, exibindo uma mensagem.
      * O método continuará solicitando até que uma entrada válida seja fornecida.
@@ -152,6 +162,15 @@ public class AgendaApp {
         }
     }
 
+    /**
+     * Solicita ao usuário que insira um texto, exibindo uma mensagem.
+     * Permite que a entrada seja vazia se o parâmetro {@code podeSerVazio} for verdadeiro.
+     *
+     * @param input        Scanner para capturar a entrada do usuário.
+     * @param mensagem     Mensagem a ser exibida solicitando a entrada.
+     * @param podeSerVazio Se {@code true}, permite que a entrada seja vazia.
+     * @return O texto inserido pelo usuário.
+     */
     static String solicitarEntradaTexto(
             Scanner input, String mensagem, boolean podeSerVazio) {
         while (true) {
@@ -167,6 +186,12 @@ public class AgendaApp {
         }
     }
 
+    /**
+     * Adiciona um novo contato à agenda.
+     *
+     * @param novoContato Um array contendo os dados do novo contato (ID, nome, telefone, e-mail).
+     * @return O contato adicionado ou {@code null} se o telefone ou e-mail já estiverem cadastrados.
+     */
     static String[] adicionar(String[] novoContato) {
         if (telefoneOuEmailDuplicado(-1, novoContato)) {
             return null;
@@ -185,6 +210,12 @@ public class AgendaApp {
         return novoContato;
     }
 
+    /**
+     * Remove um contato da agenda com base no ID fornecido.
+     *
+     * @param contactId O ID do contato a ser removido.
+     * @return O contato removido ou {@code null} se o ID não for encontrado.
+     */
     static String[] remover(String contactId) {
         int idExiste = verificarIdExistente(contactId);
 
@@ -218,6 +249,11 @@ public class AgendaApp {
         }
     }
 
+    /**
+     * Exibe os detalhes de um contato com base no ID fornecido.
+     *
+     * @param idParaListar O ID do contato a ser detalhado.
+     */
     static void detalhar(String idParaListar) {
         int indiceParalistar = verificarIdExistente(idParaListar);
 
@@ -242,6 +278,12 @@ public class AgendaApp {
                 contato[INDEX_EMAIL]);
     }
 
+    /**
+     * Verifica se um contato com o ID fornecido existe na agenda.
+     *
+     * @param contactId O ID do contato a ser verificado.
+     * @return O índice do contato na matriz se existir, ou {@code -1} se não existir.
+     */
     static int verificarIdExistente(String contactId) {
         for (int i = 0; i < tamanhoAtual; i++) {
             if (data[i][INDEX_ID].equals(contactId)) {
@@ -251,6 +293,12 @@ public class AgendaApp {
         return -1;
     }
 
+    /**
+     * Verifica se um telefone já está cadastrado na agenda.
+     *
+     * @param telefone O telefone a ser verificado.
+     * @return O índice do contato na matriz se o telefone já existir, ou {@code -1} se não existir.
+     */
     static int verificarTelefoneExiste(String telefone) {
         for (int i = 0; i < tamanhoAtual; i++) {
             String telefoneItem = data[i][INDEX_TELEFONE];
@@ -264,6 +312,12 @@ public class AgendaApp {
         return -1;
     }
 
+    /**
+     * Verifica se um e-mail já está cadastrado na agenda.
+     *
+     * @param email O e-mail a ser verificado.
+     * @return O índice do contato na matriz se o e-mail já existir, ou {@code -1} se não existir.
+     */
     static int verificarEmailExiste(String email) {
         for (int i = 0; i < tamanhoAtual; i++) {
             String emailItem = data[i][INDEX_EMAIL];
@@ -274,6 +328,13 @@ public class AgendaApp {
         return -1;
     }
 
+    /**
+     * Verifica se o telefone ou e-mail de um contato editado já estão cadastrados.
+     *
+     * @param indiceContato O índice do contato que está sendo editado.
+     * @param contatoEditado Um array contendo os dados do contato editado (ID, nome, telefone, e-mail).
+     * @return {@code true} se o telefone ou e-mail já estiverem cadastrados, {@code false} caso contrário.
+     */
     private static boolean telefoneOuEmailDuplicado(int indiceContato, String[] contatoEditado) {
         int indiceTelefoneDuplicado = verificarTelefoneExiste(contatoEditado[INDEX_TELEFONE]);
         if (indiceTelefoneDuplicado >= 0 && indiceTelefoneDuplicado != indiceContato) {
@@ -290,6 +351,12 @@ public class AgendaApp {
         return false;
     }
 
+    /**
+     * Edita um contato na agenda com base no índice fornecido.
+     *
+     * @param indiceContato O índice do contato a ser editado.
+     * @param contatoEditado Um array contendo os dados atualizados do contato (ID, nome, telefone, e-mail).
+     */
     static void editar(int indiceContato, String[] contatoEditado) {
         if (telefoneOuEmailDuplicado(indiceContato, contatoEditado)) {
             return;
