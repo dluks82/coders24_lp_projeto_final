@@ -8,6 +8,11 @@ public class AgendaApp {
 
     static int totalAtributos = 4;
 
+    static final int COLUNA_ID_WIDTH = 2;
+    static final int COLUNA_NOME_WIDTH = 30;
+    static final int COLUNA_TELEFONE_WIDTH = 20;
+    static final int COLUNA_EMAIL_WIDTH = 30;
+
     static final int INDEX_ID = 0;
     static final int INDEX_NOME = 1;
     static final int INDEX_TELEFONE = 2;
@@ -201,9 +206,6 @@ public class AgendaApp {
     }
 
     static void listar() {
-        final int COLUNA_ID_WIDTH = 2;
-        final int COLUNA_NOME_WIDTH = 30;
-
         String format = "| %-" + COLUNA_ID_WIDTH + "s | %-" + COLUNA_NOME_WIDTH + "s |%n";
 
         System.out.printf(format, "ID", "Nome");
@@ -215,40 +217,30 @@ public class AgendaApp {
             String[] contato = data[i];
             System.out.printf(format, contato[INDEX_ID], contato[INDEX_NOME]);
         }
-
     }
 
     static void detalhar(String idParaListar) {
-
         int indiceParalistar = verificarIdExistente(idParaListar);
 
         if (indiceParalistar < 0) {
             System.out.println("Id não encontrado! Tente novamente ou digite '0' para cancelar.");
-        } else {
-            int charactersColunaId = 2;
-            int charactersColunaNome = 30;
-            int charactersColunaTelefone = 20;
-            int charactersColunaEmail = 30;
-
-
-            String format = "| %-" + charactersColunaId + "s | %-" + charactersColunaNome + "s | %-" + charactersColunaTelefone + "s | %-" + charactersColunaEmail + "s %n";
-
-            System.out.printf(format, "ID", "Nome", "Telefone", "Email");
-            System.out.printf("+-%s-+-%s-+-%s-+-%s-+%n",
-                    "-".repeat(charactersColunaId),
-                    "-".repeat(charactersColunaNome),
-                    "-".repeat(charactersColunaTelefone),
-                    "-".repeat(charactersColunaEmail));
-
-
-            for (int i = 0; i < tamanhoAtual; i++) {
-                String[] contato = data[i];
-                System.out.printf(format, contato[0], contato[1], contato[2], contato[3]);
-
-            }
-
+            return;
         }
+        String format = "| %-" + COLUNA_ID_WIDTH + "s | %-" + COLUNA_NOME_WIDTH + "s | %-" + COLUNA_TELEFONE_WIDTH + "s | %-" + COLUNA_EMAIL_WIDTH + "s %n";
 
+        System.out.printf(format, "ID", "Nome", "Telefone", "Email");
+        System.out.printf("+-%s-+-%s-+-%s-+-%s-+%n",
+                "-".repeat(COLUNA_ID_WIDTH),
+                "-".repeat(COLUNA_NOME_WIDTH),
+                "-".repeat(COLUNA_TELEFONE_WIDTH),
+                "-".repeat(COLUNA_EMAIL_WIDTH));
+
+        String[] contato = data[indiceParalistar];
+        System.out.printf(format,
+                contato[INDEX_ID],
+                contato[INDEX_NOME],
+                contato[INDEX_TELEFONE],
+                contato[INDEX_EMAIL]);
     }
 
     static boolean contatoExiste(String valor, String tipo) {
