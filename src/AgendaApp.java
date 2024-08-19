@@ -201,20 +201,19 @@ public class AgendaApp {
     }
 
     static void listar() {
+        final int COLUNA_ID_WIDTH = 2;
+        final int COLUNA_NOME_WIDTH = 30;
 
-        int charactersColunaId = 2;
-        int charactersColunaNome = 30;
-
-        String format = "| %-" + charactersColunaId + "s | %-" + charactersColunaNome + "s |%n";
+        String format = "| %-" + COLUNA_ID_WIDTH + "s | %-" + COLUNA_NOME_WIDTH + "s |%n";
 
         System.out.printf(format, "ID", "Nome");
         System.out.printf("+-%s-+-%s-+%n",
-                "-".repeat(charactersColunaId),
-                "-".repeat(charactersColunaNome));
+                "-".repeat(COLUNA_ID_WIDTH),
+                "-".repeat(COLUNA_NOME_WIDTH));
 
         for (int i = 0; i < tamanhoAtual; i++) {
             String[] contato = data[i];
-            System.out.printf(format, contato[0], contato[1]);
+            System.out.printf(format, contato[INDEX_ID], contato[INDEX_NOME]);
         }
 
     }
