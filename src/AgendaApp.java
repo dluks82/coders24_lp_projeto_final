@@ -283,25 +283,20 @@ public class AgendaApp {
         return -1;
     }
 
-    static void editar(int indiceParaEditar, String[] contatoEditado) {
+    static void editar(int indiceContato, String[] contatoEditado) {
         int indiceTelefoneDuplicado = verificarTelefoneExiste(contatoEditado[INDEX_TELEFONE]);
-        if (indiceTelefoneDuplicado >= 0 && indiceTelefoneDuplicado != indiceParaEditar) {
-            System.out.println("Telefone já cadastrado!");
+
+        if ((contatoExiste(contatoEditado[INDEX_TELEFONE], "Telefone") && indiceTelefoneDuplicado != indiceContato) ||
+                (contatoExiste(contatoEditado[INDEX_EMAIL], "Email") && indiceTelefoneDuplicado != indiceContato)) {
             return;
         }
 
-        int indiceEmailDuplicado = verificarEmailExiste(contatoEditado[INDEX_EMAIL]);
-        if (indiceEmailDuplicado >= 0 && indiceEmailDuplicado != indiceParaEditar) {
-            System.out.println("Email já cadastrado!");
-            return;
-        }
-
-        data[indiceParaEditar][INDEX_NOME] =
-                contatoEditado[INDEX_NOME].isEmpty() ? data[indiceParaEditar][INDEX_NOME] : contatoEditado[INDEX_NOME];
-        data[indiceParaEditar][INDEX_TELEFONE] =
-                contatoEditado[INDEX_TELEFONE].isEmpty() ? data[indiceParaEditar][INDEX_TELEFONE] : contatoEditado[INDEX_TELEFONE];
-        data[indiceParaEditar][INDEX_EMAIL] =
-                contatoEditado[INDEX_EMAIL].isEmpty() ? data[indiceParaEditar][INDEX_EMAIL] : contatoEditado[INDEX_EMAIL];
+        data[indiceContato][INDEX_NOME] =
+                contatoEditado[INDEX_NOME].isEmpty() ? data[indiceContato][INDEX_NOME] : contatoEditado[INDEX_NOME];
+        data[indiceContato][INDEX_TELEFONE] =
+                contatoEditado[INDEX_TELEFONE].isEmpty() ? data[indiceContato][INDEX_TELEFONE] : contatoEditado[INDEX_TELEFONE];
+        data[indiceContato][INDEX_EMAIL] =
+                contatoEditado[INDEX_EMAIL].isEmpty() ? data[indiceContato][INDEX_EMAIL] : contatoEditado[INDEX_EMAIL];
 
         System.out.println("Contato atualizado com sucesso!");
     }
