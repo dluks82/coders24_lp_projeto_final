@@ -242,17 +242,6 @@ public class AgendaApp {
                 contato[INDEX_EMAIL]);
     }
 
-    static boolean contatoExiste(String valor, String tipo) {
-        if (tipo.equals("Telefone") && verificarTelefoneExiste(valor) >= 0) {
-            System.out.println(tipo + " já cadastrado!");
-            return true;
-        } else if (tipo.equals("Email") && verificarEmailExiste(valor) >= 0) {
-            System.out.println(tipo + " já cadastrado!");
-            return true;
-        }
-        return false;
-    }
-
     static int verificarIdExistente(String contactId) {
         for (int i = 0; i < tamanhoAtual; i++) {
             if (data[i][INDEX_ID].equals(contactId)) {
