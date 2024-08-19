@@ -168,8 +168,7 @@ public class AgendaApp {
     }
 
     static String[] adicionar(String[] novoContato) {
-        if (contatoExiste(novoContato[INDEX_TELEFONE], "Telefone") ||
-                contatoExiste(novoContato[INDEX_EMAIL], "Email")) {
+        if (telefoneOuEmailDuplicado(-1, novoContato)) {
             return null;
         }
 
@@ -266,7 +265,10 @@ public class AgendaApp {
     static int verificarTelefoneExiste(String telefone) {
         for (int i = 0; i < tamanhoAtual; i++) {
             String telefoneItem = data[i][INDEX_TELEFONE];
-            if (telefoneItem.trim().equals(telefone.trim())) {
+            if (telefoneItem.trim()
+                    .replace(" ", "")
+                    .equals(telefone.trim()
+                            .replace(" ", ""))) {
                 return i;
             }
         }
@@ -283,11 +285,24 @@ public class AgendaApp {
         return -1;
     }
 
-    static void editar(int indiceContato, String[] contatoEditado) {
+    private static boolean telefoneOuEmailDuplicado(int indiceContato, String[] contatoEditado) {
         int indiceTelefoneDuplicado = verificarTelefoneExiste(contatoEditado[INDEX_TELEFONE]);
+        if (indiceTelefoneDuplicado >= 0 && indiceTelefoneDuplicado != indiceContato) {
+            System.out.println("Telefone já cadastrado!");
+            return true;
+        }
 
-        if ((contatoExiste(contatoEditado[INDEX_TELEFONE], "Telefone") && indiceTelefoneDuplicado != indiceContato) ||
-                (contatoExiste(contatoEditado[INDEX_EMAIL], "Email") && indiceTelefoneDuplicado != indiceContato)) {
+        int indiceEmailDuplicado = verificarEmailExiste(contatoEditado[INDEX_EMAIL]);
+        if (indiceEmailDuplicado >= 0 && indiceEmailDuplicado != indiceContato) {
+            System.out.println("Email já cadastrado!");
+            return true;
+        }
+
+        return false;
+    }
+
+    static void editar(int indiceContato, String[] contatoEditado) {
+        if (telefoneOuEmailDuplicado(indiceContato, contatoEditado)) {
             return;
         }
 
