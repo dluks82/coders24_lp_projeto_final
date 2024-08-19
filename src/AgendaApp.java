@@ -338,7 +338,7 @@ public class AgendaApp {
                 ║        [6] - Sobre                               ║
                 ║                                                  ║
                 ║        [9] - Sair                                ║
-                ╚══════════════════════════════ Contatos""" + " " + contador + " ═════╝"); // 52 de largura
+                ╚══════════════════════════════ Contatos""" + " " + contador + " ═════╝");
     }
 
     static void exibirSobre() {
