@@ -306,15 +306,13 @@ public class AgendaApp {
     }
 
     static void crescerMatriz() {
-        // matriz atual + 1
         int novaCapacidade = data.length + 1;
-        // cria a nova matriz
         String[][] novaMatriz = new String[novaCapacidade][totalAtributos];
+
         // copia os dados da matriz atual para a nova matriz
         for (int i = 0; i < data.length; i++) {
             novaMatriz[i] = data[i];
         }
-        // define a nova matriz como a atual
         data = novaMatriz;
     }
 
