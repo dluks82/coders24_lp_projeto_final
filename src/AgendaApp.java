@@ -217,15 +217,15 @@ public class AgendaApp {
      * @return O contato removido ou {@code null} se o ID não for encontrado.
      */
     static String[] remover(String contactId) {
-        int idExiste = verificarIdExistente(contactId);
+        int indiceParaRemover = verificarIdExistente(contactId);
 
-        if (idExiste < 0) {
+        if (indiceParaRemover < 0) {
             return null;
         }
 
-        String[] contatoRemovido = data[idExiste];
+        String[] contatoRemovido = data[indiceParaRemover];
 
-        for (int j = idExiste; j < tamanhoAtual - 1; j++) {
+        for (int j = indiceParaRemover; j < tamanhoAtual - 1; j++) {
             data[j] = data[j + 1];
         }
 
