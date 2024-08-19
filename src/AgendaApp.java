@@ -187,13 +187,17 @@ public class AgendaApp {
         if (idExiste < 0) {
             return null;
         }
-        if (idExiste != tamanhoAtual - 1) {
-            for (int j = idExiste; j < tamanhoAtual - 1; j++) {
-                data[j] = data[j + 1];
-            }
+
+        String[] contatoRemovido = data[idExiste];
+
+        for (int j = idExiste; j < tamanhoAtual - 1; j++) {
+            data[j] = data[j + 1];
         }
+
+        data[tamanhoAtual - 1] = null;
+
         tamanhoAtual--;
-        return data[idExiste];
+        return contatoRemovido;
     }
 
     static void listar() {
@@ -258,7 +262,6 @@ public class AgendaApp {
         }
         return false;
     }
-
 
     static int verificarIdExistente(String contactId) {
         for (int i = 0; i < tamanhoAtual; i++) {
